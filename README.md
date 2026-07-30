@@ -1,47 +1,59 @@
-# AI Translator
+# Simple Language Translator
 
-A simple AI-powered translator built with Streamlit and Ollama. Translate text into multiple languages using a local LLM.
-
-## Features
-
-- Translate text into multiple languages
-- Runs completely offline with Ollama
-- Simple and clean Streamlit interface
-- Fast and easy to use
+A small Streamlit app that translates text into Hindi, Gujarati, Marathi, Tamil, Telugu, Bengali, Punjabi, or English using a local Ollama model.
 
 ## Requirements
 
 - Python 3.9+
-- Ollama installed
-- A downloaded Ollama model (e.g. `phi3:mini`)
+- [Ollama](https://ollama.com) installed and running locally
+- The `qwen2.5:3b` model pulled in Ollama
 
-## Installation
+## Setup
 
-Clone the repository:
+1. Install Ollama from https://ollama.com and make sure it's running.
 
-```bash
-git clone https://github.com/your-username/ai-translator.git
-cd ai-translator
-```
+2. Pull the model:
+   ```
+   ollama pull qwen2.5:3b
+   ```
 
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Pull the Ollama model:
-
-```bash
-ollama pull phi3:mini
-```
+3. Install Python dependencies:
+   ```
+   pip install streamlit ollama
+   ```
 
 ## Run
 
-Start the Ollama server:
-
-```bash
-ollama serve
+```
+streamlit run simple_app.py
 ```
 
-Run the
+This opens the app in your browser, usually at `http://localhost:8501`.
+
+## Usage
+
+1. Type or paste text into the "Enter Text" box.
+2. Choose a target language from the dropdown.
+3. Click "Translate".
+4. The translation appears in the "Translation" box below.
+
+## Notes on accuracy
+
+`qwen2.5:3b` is a small (3B parameter) model. It runs fast and needs little disk space (~1.9GB), but translation quality for Indic languages will still be inconsistent, especially for uncommon words or idioms. For more reliable results, consider:
+
+- A larger local model such as `llama3.1:8b` (better multilingual quality, ~4.7GB)
+- A dedicated translation API/service such as Google Translate, Bhashini, or IndicTrans2
+
+## Changing the model
+
+To try a different model, edit `simple_app.py` and change this line:
+
+```python
+model="qwen2.5:3b",
+```
+
+to any model name you have pulled in Ollama (check with `ollama list`).
+
+## Files
+
+- `simple_app.py` — the Streamlit application
