@@ -37,3 +37,4 @@ if st.button("Translate"):
         translation = translation.split("(")[0].strip()
 
         st.text_area("Translation", value=translation)
+st.success("Made By Bhavya S Solanki")
